@@ -1,18 +1,35 @@
 import React, { Component, Fragment } from 'react';
 
-import GitHubRepoInfo from './GitHubRepoInfo';
-import MyInfo from './MyInfo';
-import GitHubRepoByLang from './GitHubRepoByLang';
+import About from './About';
+import Navbar from './Navbar';
+import Projects from './Projects';
+import Skills from './Skills';
+import Testimonials from './Testimonials';
+import Contact from './Contact';
 
 const URL = 'https://api.github.com/users/jlameiro87/repos?per_page=100';
 
 class Dashboard extends Component {
   state = {
     gitHubInfo: null,
-    languages: null
+    languages: null,
+    skills: null
   }
 
   componentDidMount() {
+    const skills = [
+      {
+        id: 1,
+        name: 'JavaScript',
+        note: 'Advanced'
+      },
+      {
+        id: 2,
+        name: 'Java',
+        note: 'Advanced'
+      }
+    ];
+    this.setState({ skills: skills });
     this.fetchGithubUserInfo();
   }
 
@@ -33,15 +50,17 @@ class Dashboard extends Component {
   render() {
     return (
       <Fragment>
-        <MyInfo></MyInfo>
+        <Navbar />
+        <About />
         {
-          this.state.languages &&
-          <GitHubRepoByLang languages={this.state.languages}></GitHubRepoByLang>
+          this.state.gitHubInfo && this.state.languages &&
+          <Projects gitHubInfo={this.state.gitHubInfo} languages={this.state.languages} />
         }
         {
-          this.state.gitHubInfo &&
-          <GitHubRepoInfo gitHubInfo={this.state.gitHubInfo}></GitHubRepoInfo>
+          this.state.skills && <Skills skills={this.state.skills} />
         }
+        <Testimonials />
+        <Contact />
       </Fragment>
     )
   }

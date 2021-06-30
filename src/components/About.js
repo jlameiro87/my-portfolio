@@ -1,9 +1,7 @@
-import React from 'react';
-
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-function MyInfo() {
+const About = () => {
   return (
     <Container fixed>
       <Typography component="div" variant="h4" gutterBottom>
@@ -20,7 +18,7 @@ function MyInfo() {
         Perpetual learner.
       </Typography>
     </Container>
-  );
+  )
 }
 
-export default MyInfo;
+export default About;
